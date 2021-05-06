@@ -5,37 +5,39 @@
 #include <string.h>
 #include <sys/wait.h>
 
-int fd1[2];
-int fd2[2];
+int first_pipe[2], second_pipe[2];
 
-void execPS()
+void execPs()
 {
-    dup2(fd1[1], STDOUT_FILENO);
-    close(fd1[0]);
-    close(fd1[1]);
-    char *argv[] = {"ps", "-aux", NULL};
+    dup2(first_pipe[1], 1);
+
+    close(first_pipe[0]);
+    close(first_pipe[1]);
+
+    char *argv[] = {"ps", "aux", NULL};
     execv("/bin/ps", argv);
 }
 
 void execSort()
 {
-    dup2(fd1[0], STDIN_FILENO);
-    dup2(fd2[1], STDOUT_FILENO);
+    dup2(first_pipe[0], 0);
+    dup2(second_pipe[1], 1);
 
-    close(fd1[0]);
-    close(fd1[1]);
-    close(fd2[0]);
-    close(fd2[1]);
-    char *argv[] = {"tail", "-10", NULL};
-    execv("/usr/bin/tail", argv);
+    close(first_pipe[0]);
+    close(first_pipe[1]);
+    close(second_pipe[0]);
+    close(second_pipe[1]);
+
+    char *argv[] = {"sort", "-nrk", "3,3", NULL};
+    execv("/usr/bin/sort", argv);
 }
 
 void execHead()
 {
-    dup2(fd2[0], STDIN_FILENO);
+    dup2(second_pipe[0], 0);
 
-    close(fd2[0]);
-    close(fd2[1]);
+    close(second_pipe[0]);
+    close(second_pipe[1]);
 
     char *argv[] = {"head", "-5", NULL};
     execv("/usr/bin/head", argv);
@@ -43,26 +45,33 @@ void execHead()
 
 int main()
 {
-    if (pipe(fd1) == -1)
-    {
-        fprintf(stderr, "Pipe Failed");
-        return 1;
-    }
-    if (pipe(fd2) == -1)
+    if (pipe(first_pipe) == -1)
     {
         fprintf(stderr, "Pipe Failed");
         return 1;
     }
 
-    if (fork() == 0)
+    if (fork() == 0) // ls
     {
-        execPS();
+        execPs();
     }
 
-    if (fork() == 0)
+    if (pipe(second_pipe) == -1)
+    {
+        fprintf(stderr, "Pipe Failed");
+        return 1;
+    }
+
+    if (fork() == 0) // wc -l
     {
         execSort();
     }
 
-    execHead();
+    close(first_pipe[0]);
+    close(first_pipe[1]);
+
+    if (fork() == 0) // wc -l
+    {
+        execHead();
+    }
 }

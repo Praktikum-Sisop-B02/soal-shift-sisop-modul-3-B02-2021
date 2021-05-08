@@ -51,7 +51,7 @@ int main()
         return 1;
     }
 
-    if (fork() == 0) // ls
+    if (fork() == 0)
     {
         execPs();
     }
@@ -62,7 +62,7 @@ int main()
         return 1;
     }
 
-    if (fork() == 0) // wc -l
+    if (fork() == 0)
     {
         execSort();
     }
@@ -70,7 +70,7 @@ int main()
     close(first_pipe[0]);
     close(first_pipe[1]);
 
-    if (fork() == 0) // wc -l
+    if (fork() == 0)
     {
         execHead();
     }

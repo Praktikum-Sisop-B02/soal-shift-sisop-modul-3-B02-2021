@@ -20,9 +20,7 @@ unsigned long long int matrix_fact_result[MATRIX_FACT_ROW][MATRIX_FACT_COL];
 typedef struct permutation_t
 {
     int a,
-        b,
-        row,
-        col;
+        b;
 
     unsigned long long int *write_to;
 
@@ -115,8 +113,6 @@ void performMatrixCellPermutation()
             Permutation permutation;
             permutation.a = matrix_multi_result[row][col];
             permutation.b = matrix_fact[row][col];
-            permutation.row = row;
-            permutation.col = col;
             permutation.write_to = &matrix_fact_result[row][col];
 
             pthread_create(&thread[row][col], NULL, calculateCell, &permutation);

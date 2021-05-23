@@ -1,0 +1,7 @@
+a:a
+a:a
+vvv:ddd
+aaa:ccc
+ddd:vvv
+ddd:sss
+a:s

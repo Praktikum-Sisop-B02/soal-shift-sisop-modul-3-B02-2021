@@ -2160,7 +2160,7 @@ Untuk penggunaan opsi ```-f``` dimana kegunaannya sama dengan opsi ```-d``` teta
 ```
 Untuk menjalankan opsi ```-f``` yaitu
 ```shell
-./soal3 -f /path/to/file1.zip path/to/file2.c path/to/file3.TXT
+$ ./soal3 -f /path/to/file1.zip path/to/file2.c path/to/file3.TXT
 ```
 untuk cara diatas, pada bagian .zip, .c, dan .TXT merupakan ekstensi file. Jadi bisa menggunakan ekstensi yang lain.
 
@@ -2186,7 +2186,7 @@ Directory tersebut akan di kategorikan.
 Jika berhasil maka akan mengeluarkan  **“Direktori sukses disimpan!”** dan jika gagal **“Yah, gagal disimpan :(“**.
 Untuk menjalankan opsi ```-d``` pada terminal yaitu
 ```shell
-./soal3 -d /path/to/directory
+$ ./soal3 -d /path/to/directory
 ```
 
 Untuk penggunaan opsi terakhir yaitu opsi ```*``` sendiri ini berlaku beda dengan opsi-opsi yang lain. Dimana opsi ```-d``` untuk mengkategorikan directory dan opsi ```-f``` akan mengkategorikan file yang tersedia. Untuk opsi ```*``` ini, jika kita memanggilnya di terminal, maka file-file yang ada di directory tersebut akan di masukkan kedalam directory-directory masing-masing sesuai dengan ekstensi file tersebut.
@@ -2219,5 +2219,5 @@ Untuk penggunaan opsi terakhir yaitu opsi ```*``` sendiri ini berlaku beda denga
 ```
 Untuk memanggil opsi ```*``` yaitu
 ```shell
-./soal3 \*
+$ ./soal3 \*
 ```

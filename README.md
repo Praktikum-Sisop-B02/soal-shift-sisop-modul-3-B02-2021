@@ -1868,7 +1868,7 @@ Setelah child process selesai, main program akan melakukan fork kembali dimana c
 ## NOMOR 3
 
 #### Penyelesaian
-```
+```C++
 #include <stdio.h>
 #include <string.h>
 #include <pthread.h>
@@ -2088,7 +2088,7 @@ int main(int argc, char *argv[])
 
 #### Penjelasan
 Pada bagian fungsi cekExist() digunakan untuk mengecek apakah file tersedia atau tidak pada directory yang sedang dituju.
-```
+```C++
 int cekExist(const char *filenamae)
 {
     struct stat buffer;
@@ -2101,7 +2101,7 @@ int cekExist(const char *filenamae)
 ```
 
 Untuk fungsi move() digunakan untuk move file ke dalam directory-directory atau folder-folder yang sesuai dengan ekstensi file tersebut. Dan jika file nya hidden, maka akan dimasukkan kedalam directory yang bernama Hidden.
-```
+```C++
 if (hidden[1] == '.')
     {
         strcpy(dirnamae, "Hidden");
@@ -2109,7 +2109,7 @@ if (hidden[1] == '.')
 ```
 
 Dan juga, jika ada file yang tidak memiliki ekstensi maka akan dimasukkan ke folder Unknown.
-```
+```C++
  //file gaada extensi
     else
     {
@@ -2121,7 +2121,7 @@ Untuk move file menggunakan ```rename(filenamae, namaefile)```
 
 
 Untuk penggunaan opsi ```-f``` dimana kegunaannya sama dengan opsi ```-d``` tetapi dengan opsi ```-f``` ini mengkategorikan file. Berbeda dengan opsi ```-d``` yang mana dapat mengkategorikan hanya 1 directory per dijalankan, opsi ```-f``` dapat mengkategorikan beberapa file dalam sekali jalan.
-```
+```C++
  if (strcmp(argv[1], "-f") == 0)
     {
 
@@ -2159,7 +2159,7 @@ Untuk penggunaan opsi ```-f``` dimana kegunaannya sama dengan opsi ```-d``` teta
         pthread_join(thread, NULL);
 ```
 Untuk menjalankan opsi ```-f``` yaitu
-```
+```shell
 ./soal3 -f /path/to/file1.zip path/to/file2.c path/to/file3.TXT
 ```
 untuk cara diatas, pada bagian .zip, .c, dan .TXT merupakan ekstensi file. Jadi bisa menggunakan ekstensi yang lain.
@@ -2168,7 +2168,7 @@ Untuk fungsi rekursifList() digunakan pada opsi ```-d``` dan opsi ```*```.
 
 Jika menggunakan opsi ```-d``` maka akan menjalankan path/to/directory nya kedalam fungsi tersebut.
 Directory tersebut akan di kategorikan.
-```
+```C++
   if (strcmp(argv[1], "*") == 0)
 
         {
@@ -2185,12 +2185,12 @@ Directory tersebut akan di kategorikan.
 ```
 Jika berhasil maka akan mengeluarkan  **“Direktori sukses disimpan!”** dan jika gagal **“Yah, gagal disimpan :(“**.
 Untuk menjalankan opsi ```-d``` pada terminal yaitu
-```
+```shell
 ./soal3 -d /path/to/directory
 ```
 
 Untuk penggunaan opsi terakhir yaitu opsi ```*``` sendiri ini berlaku beda dengan opsi-opsi yang lain. Dimana opsi ```-d``` untuk mengkategorikan directory dan opsi ```-f``` akan mengkategorikan file yang tersedia. Untuk opsi ```*``` ini, jika kita memanggilnya di terminal, maka file-file yang ada di directory tersebut akan di masukkan kedalam directory-directory masing-masing sesuai dengan ekstensi file tersebut.
-```
+```C++
   else if (strcmp(argv[1], "-d") == 0)
         {
 
@@ -2218,6 +2218,6 @@ Untuk penggunaan opsi terakhir yaitu opsi ```*``` sendiri ini berlaku beda denga
         }
 ```
 Untuk memanggil opsi ```*``` yaitu
-```
+```shell
 ./soal3 \*
 ```
